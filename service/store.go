@@ -2,7 +2,6 @@ package service
 
 import (
 	"context"
-	"fmt"
 
 	pb "github.com/Asliddin3/store-servis/genproto"
 	l "github.com/Asliddin3/store-servis/pkg/logger"
@@ -24,18 +23,20 @@ func NewStoreService(db *sqlx.DB, log l.Logger) *StoreService {
 	}
 }
 
-func (s *StoreService) Create(ctx context.Context,req *pb.StoreRequest) (*pb.StoreResponse,error){
-	store,err:=s.storage.Product()
-}
-
-
-func (s *ProductService) Update(ctx context.Context, req *pb.Product) (*pb.Product, error) {
-	product, err := s.storage.Product().Update(req)
+func (s *StoreService) Create(ctx context.Context, req *pb.StoreRequest) (*pb.StoreResponse, error) {
+	store, err := s.storage.Store().Create(req)
 	if err != nil {
-		s.logger.Error("error while updating product", l.Any("error updating product", err))
-		return &pb.Product{}, status.Error(codes.Internal, "something went wrong")
+		s.logger.Error("error while creating store", l.Any("error creating store", err))
+		return &pb.StoreResponse{}, status.Error(codes.Internal, "something went wrong")
 	}
-	return product, nil
+	return store, nil
 }
 
-
+func (s *StoreService) GetStore(ctx context.Context, req *pb.GetStoreInfoById) (*pb.StoreResponse, error) {
+	store, err := s.storage.Store().GetStore(req)
+	if err != nil {
+		s.logger.Error("error while geting store", l.Any("error geting stroe", err))
+		return &pb.StoreResponse{}, status.Error(codes.Internal, "something went wrong")
+	}
+	return store, nil
+}

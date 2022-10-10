@@ -5,6 +5,6 @@ import (
 )
 
 type StoreStorageI interface{
-	Create(*pb.StoreRequest)(*pb.StoreResponse)
-	GetStore(*pb.GetStoreInfoById)(*pb.StoreResponse)
+	Create(*pb.StoreRequest)(*pb.StoreResponse,error)
+	GetStore(*pb.GetStoreInfoById)(*pb.StoreResponse,error)
 }
