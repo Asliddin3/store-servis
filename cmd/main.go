@@ -33,7 +33,7 @@ func main() {
 	}
 	s := grpc.NewServer()
 	reflection.Register(s)
-	pb.RegisterProductServiceServer(s,storeService)
+	pb.RegisterStoreserviceServer(s,storeService)
 	log.Info("main: server runing",
 		logger.String("port", cfg.RPCPort))
 	if err := s.Serve(lis); err != nil {

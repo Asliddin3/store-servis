@@ -3,7 +3,7 @@ syntax = "proto3";
 package store;
 
 service Storeservice {
-  rpc CreateStore (StoreRequest) returns (StoreResponse);
+  rpc Create(StoreRequest) returns (StoreResponse);
   rpc GetStore(GetStoreInfoById) returns (StoreResponse);
 }
 
